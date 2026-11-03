@@ -7,6 +7,11 @@
 
 <style lang="scss">
   @import "../style/matc.scss";
+  @import "../style/canvas/all.scss";
+  @import '../style/toolbar/all.scss';
+</style>
+<style lang="sass">
+  @import "../style/bulma.sass"
 </style>
 
 <script>
@@ -83,6 +88,8 @@ export default {
      * Dependency injection
      */
     controller.setModelService(Services.getPublicModelService())
+    // demo only: local undo stack, so edits render on the canvas
+    controller.setCommandService(Services.getCommandService())
     controller.setToolbar(toolbar);
     controller.setModelFactory(factory);
     controller.setPublic(true)
@@ -130,7 +137,8 @@ export default {
     /**
      * controller will render screen
      */
-    controller.setModel(model, "");
+    // demo only: open the canvas on the first screen
+    controller.setModel(model, "s10000");
 
     /**
      * Init layer list

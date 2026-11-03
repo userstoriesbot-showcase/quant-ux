@@ -1,0 +1,17 @@
+# Showcase fork only (never part of an upstream pull request).
+version: 1
+app:
+  # The vue-cli dev server peaks near 3.4 GB and a production build near 5 GB
+  # (terser workers); an unminified development build with a capped heap
+  # peaks near 2 GB, so build in install and let the worker serve dist.
+  install: "npm ci && NODE_OPTIONS=--max-old-space-size=1536 npx vue-cli-service build --mode development"
+  static: dist
+  url: http://localhost:{port}
+  readyPath: /
+  readyStatus: 200
+  runtime: node22
+  env:
+    NODE_ENV: development
+demo:
+  maxVideos: 1
+  beforePass: true
